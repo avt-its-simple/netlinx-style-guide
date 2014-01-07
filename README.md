@@ -89,7 +89,8 @@ should be used instead of
 #### Complex Conditionals
 For complex conditionals which expand beyond the defined column width each condition is to be placed on a new line and the line indented by a TAB character further than the parent.
 
-	define_function fooBar() {
+	define_function fooBar()
+	{
 	    ...
 	    if (x > y &&
 	        x <= z &&
@@ -123,32 +124,35 @@ rather than
 	char tmp[] = {'a', 'b', 'c'};
 
 ### Brace Placement
-Opening braces are to always be the last character of the line which opens the code block. Closing braces are to exist on their own line, with the same indentation as the parent opening line.
+
+All bracing is to follow a style base on a modified version of the [K&R style (1TBS variant)](http://en.wikipedia.org/wiki/Indent_style#K.26R_style). All top level elements are to have the opening brace on a line to itslef. Nestable elements will have the opening brace on the statements line.
 
 #### Function Definitions
-The first line of a function definition should include the required preamble, function name the parameter list and opening brace.
+As functions are a top level element the first line of a function definition should include the required preamble, function name the parameter list. The open brace of the function scope is to be placed on the following line.
 
-	define_function char fooBar (integer a, char b) {
-	    // Do something
+	define_function char fooBar (integer a, char b)
+	{
+	    // Return something
 	}
 
 #### Event Handlers
-Netlinx event handlers are to be formatted in the same way as function blocks. That is, the opening brace is to sit on the same line as the event definition.
+Netlinx event definitions are to be formatted in the same way as function blocks. That is, the opening brace is to sit on a line by itself following the event definition. Contained handlers are then to have the opening brace on the same line as the handler type.
 
-	button_event[device, 0] {
+	button_event[device, 0]
+	{
 	
 	    push: {
 	        // Do push event guff
 	    }
-	
+	    
 	    release: {
 	        // Do release event
 	    }
-	
+	    
 	}
 
-#### Non-Function / Event Statement Blocks
-All other statement block are to have the opening brace appear on the same line as the block's opening statement.
+#### Nestable Blocks
+All other statement blocks are to have the opening brace appear on the same line as the block's opening statement.
 
 	if (x > y) {
 	    // Do something
