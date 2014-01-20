@@ -14,77 +14,111 @@ Each level of indentation is to be the same width as a single TAB character. Alt
 ### Spaces
 Where possible, excess whitespace should be avoided. The exception to this is where it provides a logical separation between values.
 
-Do *not* add spaces around (inside) parenthesized expressions. The following is a *bad* example
+A space never follows another space except in strings or comments.
 
-	fooBar( x )
+No space follows an opening bracket, `(` or `[`, or precedes a closing bracket, `)` or `]`.
 
-Use one space around (on each side of) binary operators, such as any of these:
+Each brace, `{` or `}`, whether delimiting a code block or the elements of an array, is preceded by a space; a space also follows an opening brace `{`.
 
-	=  +  -  <  >  *  /  %  |  &  ^  <=  >=  ==  !=
-	
-but no space before the postfix increment & decrement unary operators:
+Commas `,` and semicolons `;` are always followed by a space; no space precedes them. Colons `:` are not preceded by a space.
 
-	++  --
+Assignments `=`, tests for equality/inequality (`==`, `>`, ...), binary operators (`+`, `&&`, ...) are all preceded and followed by a space.
 
-When calling functions, no space should be inserted between the function name and opening parenthesis of the argument list, however arguments should be separated by a comma followed by a single space.
+Unary operators (`++`, `--`, `!`) are not separated from their operands.
 
-String concatenation should follow the same spacing form as function argument lists described above.
+No space precedes the opening bracket of an array index `[`, or the opening bracket `(` of a method argument argument list, either in declaration or invocation.
 
 #### Examples
 
 ##### For Loops
 
 	integer i;
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
+	{
 	    fooBar(i * 10, 'abc');
-	}
-	
-is preferable to
-
-	integer i;
-	for ( i = 0 ; i < 10 ; i++ ) {
-	    fooBar ( i * 10, 'abc' );
-	}
-
-or
-
-	integer i;
-	for(i=0;i<10;i++){
-	    fooBar(i*10,'abc');
 	}
 
 ##### String Concatenation
 
 	char[] x = "'foo', $20, 'bar'";
 
-is preferred to
-
-	char[] x="'foo',$20,'bar'";
-
 ##### Functions
+
+	define_function fooBar(integer i, char c[])
+	{
+	    ....
+	}
+
+and when calling
 
 	fooBar(i * 10, 'abc');
 
-is preferable to
 
-	fooBar ( i * 10 , 'abc');
+### Brace Placement
 
-or
+All bacing is to follow the 'Allman' style. This style puts the brace associated with a control statement on the next line, indented to the same level as the control statement. Statements within the braces are indented to the next level.
 
-	fooBar(i*10,'abc');
+If braces can be used, they should always be placed. For example, do *not* do the following:
+
+	if (a > b)
+	    fooBar(c);
+
+instead opt for
+
+	if (a > b)
+	{
+	    foobar(c);
+	}
+
+This style ensure that indented code is clearly set apart from the containing statement. Additionally, it assists in that commenting out the control statement, removing the control statement entirely, refactoring, or removing of the block of code is less likely to introduce syntax errors because of dangling or missing braces.
+
+#### Examples
+
+##### Functions
+
+	define_function char fooBar (integer i, char c)
+	{
+	    ...
+	}
+
+##### Event Handlers
+
+	button_event[device, 0]
+	{
+	
+	    push:
+	    {
+	        ...
+	    }
+	    
+	    release:
+	    {
+	        ...
+	    }
+	    
+	}
+
+##### Nestable Blocks
+
+	if (a > b)
+	{
+	    ...
+	}
+
 
 ### Line Breaks
 
 #### Conditional Statements
 Conditional statements should always split the condition and the action into separate lines. For example
 
-	if (x == y) {
-	    fooBar(z);
+	if (a == b)
+	{
+	    fooBar(c);
 	}
 	
 should be used instead of
 
-	if (x == y) fooBar(z);
+	if (a == b) fooBar(c);
 
 #### Complex Conditionals
 For complex conditionals which expand beyond the defined column width each condition is to be placed on a new line and the line indented by a TAB character further than the parent.
@@ -92,71 +126,43 @@ For complex conditionals which expand beyond the defined column width each condi
 	define_function fooBar()
 	{
 	    ...
-	    if (x > y &&
-	        x <= z &&
-	        w <> x) {
-	        // Do something
+	    if (a > b &&
+	        a <= c &&
+	        a <> d)
+	    {
+	        ...
 	    }
 	    ...
 	}
 
 #### Argument Lists
-If a function requires an extended argument list which causes the invocation to expand beyond the defined column width, arguments should wrap to the next line and be indented by two tab characters beyond the current level of indentation.
+If a function requires an extended argument list which causes the invocation to expand beyond the defined column width, arguments should wrap to the next line with one argument per line and be indented by two tab characters beyond the current level of indentation.
 
-	uberFooBar(arg0, arg1, arg2, arg3,
-	        arg4, arg5);
+	uberFooBar(a,
+	        b, 
+	        c,
+	        d,
+	        e,
+	        f);
 	        
 If the arguments can fit within the column width they invocation should be written as a single line.
 
-	fooBar(arg0, arg1);
+	fooBar(a, b);
 
 #### Array Assignment
-When assigning a list a values to an array, each entry should appear on its own line:
+As with argument lists and complex conditions if the length exceeds one line elements are to be wrapped, with one per line.
 
-	char tmp[] = {
+	char uberArray[] =
+	{
 	    'a',
 	    'b',
-	    'c'
+	    'c',
+	    'd',
+	    'e',
+	    'f'
 	};
 
-rather than
-
-	char tmp[] = {'a', 'b', 'c'};
-
-### Brace Placement
-
-All bracing is to follow a style base on a modified version of the [K&R style (1TBS variant)](http://en.wikipedia.org/wiki/Indent_style#K.26R_style). All top level elements are to have the opening brace on a line to itslef. Nestable elements will have the opening brace on the statements line.
-
-#### Function Definitions
-As functions are a top level element the first line of a function definition should include the required preamble, function name the parameter list. The open brace of the function scope is to be placed on the following line.
-
-	define_function char fooBar (integer a, char b)
-	{
-	    // Return something
-	}
-
-#### Event Handlers
-Netlinx event definitions are to be formatted in the same way as function blocks. That is, the opening brace is to sit on a line by itself following the event definition. Contained handlers are then to have the opening brace on the same line as the handler type.
-
-	button_event[device, 0]
-	{
-	
-	    push: {
-	        // Do push event guff
-	    }
-	    
-	    release: {
-	        // Do release event
-	    }
-	    
-	}
-
-#### Nestable Blocks
-All other statement blocks are to have the opening brace appear on the same line as the block's opening statement.
-
-	if (x > y) {
-	    // Do something
-	}
+	char simpleArray[] = {'a', 'b', 'c'};
 
 
 ## Naming, Logic and Higher Techniques
