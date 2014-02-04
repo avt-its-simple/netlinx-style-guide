@@ -12,9 +12,7 @@ Column width is to be set to 80 characters. As a guideline lines should not exce
 Each level of indentation is to be the same width as a single TAB character. Although indentation does not affect logic structure within the NetLinx language, it is imperative that this is maintained for code readability.
 
 ### Spaces
-Where possible, excess whitespace should be avoided. The exception to this is where it provides a logical separation between values.
-
-A space never follows another space except in strings or comments.
+Where possible, excess whitespace should be avoided. The exception to this is where it provides a logical separation between values or you are vertically aligning a set of related assignment operations.
 
 No space follows an opening bracket, `(` or `[`, or precedes a closing bracket, `)` or `]`.
 
